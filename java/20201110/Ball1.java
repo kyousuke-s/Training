@@ -24,11 +24,18 @@ public class Ball1{
 import java.util.*;
 public class Ball1{
 	public static void main(String[] args){
+		//ボールを配列に入れる
 		int[] balls={1,2,3,4,5};
+		//配列の要素数分まわす
 		for(int i=0;i<balls.length;i++){
+			//インデックスの値にランダムの数値を代入
 			int index=new Random().nextInt(balls.length-i);
+			//ランダムで選出した番号のボールを表示
 			System.out.println(balls[index]);
+			//選出したボールを除外する準備
+			//tempに直前に選出したボールを代入
 			int temp=balls[index];
+			//選出したボールに配列の最後の要素を代入
 			balls[index]=balls[balls.length-1-i];
 			balls[balls.length-1-i]=temp;
 		}

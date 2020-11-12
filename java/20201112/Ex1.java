@@ -9,9 +9,12 @@ public class Ex1{
 			int num=new Random().nextInt(nums.length)+1;
 			nums[i]=num;
 			System.out.print(nums[i]+",");
+			count=nums[i]==myNum?count+1:count;
+			/*
 			if(nums[i]==myNum){
 				count++;
 			}
+			*/
 		}
 		System.out.println();
 		if(count==0){

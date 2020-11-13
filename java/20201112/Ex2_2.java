@@ -1,5 +1,5 @@
 import java.util.*;
-public class Ex2{
+public class Ex2_2{
 	public static void main(String[] args){
 		//要素数の入力、配列の作成
 		System.out.print("要素数を入力>");
@@ -29,22 +29,14 @@ public class Ex2{
 			}
 		}
 		System.out.println(Arrays.toString(nums));
-		//求める値が出なかった場合
-		if(count[0]==0){
-			System.out.printf("%dは出ませんでした。%n",target[0]);
-		//求める値が出ていたら
-		}else{
-			System.out.printf("%dは%d回出ました。%n",target[0],count[0]);
-		}
-		if(count[1]==0){
-			System.out.printf("%dは出ませんでした。%n",target[1]);
-		}else{
-			System.out.printf("%dは%d回出ました。%n",target[1],count[1]);
-		}
-		if(count[2]==0){
-			System.out.printf("%dは出ませんでした。%n",target[2]);
-		}else{
-			System.out.printf("%dは%d回出ました。%n",target[2],count[2]);
+		for(int i=0;i<nums.length-1;i++){
+			//求める値が出なかった場合
+			if(count[i]==0){
+				System.out.printf("%dは出ませんでした。%n",target[i]);
+			//求める値が出ていたら
+			}else{
+				System.out.printf("%dは%d回出ました。%n",target[i],count[i]);
+			}
 		}
 	}
 }

@@ -1,0 +1,318 @@
+■強制的に削除
+
+$ rm -rf git_basic
+
+■リポジトリー（貯蔵庫）をつくる
+
+$ git init
+
+■コミットするものをステージングエリアに登録
+
+git add
+
+■コミット　このあと開く画面の1行目からコミットの内容をにゅうりょく（仕事では３行ほどで書くことが多い）
+
+$ git commit
+[master (root-commit) 540f4f6] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test.txt
+
+
+■HEADとの差分を表示
+
+$ git diff HEAD
+diff --git a/test.txt b/test.txt
+index c380edd..1043c7d 100644
+--- a/test.txt
++++ b/test.txt
+@@ -1 +1,2 @@
+ first_line
++secomd_line
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* 540f4f6  (HEAD -> master) 2020-11-13 sato first commit
+
+■ファイルに追記する
+
+$ echo "third_line" >> test.txt
+
+■git graph で git log -graph を表示する方法
+
+$ git config --global alias.graph "log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short" 
+
+■過去の状態に戻る（入力する番号は4~5桁ほどで大丈夫）
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* ca15c14  (HEAD -> master) 2020-11-13 sato third commit
+* 929d14e  2020-11-13 sato second commit
+* 540f4f6  2020-11-13 sato first commit
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git reset --hard 540f4f
+HEAD is now at 540f4f6 first commit
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ cat test.txt
+first_line
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* 540f4f6  (HEAD -> master) 2020-11-13 sato first commit
+
+■最新の現状に戻る
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* 540f4f6  (HEAD -> master) 2020-11-13 sato first commit
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git reflog
+540f4f6 (HEAD -> master) HEAD@{0}: reset: moving to 540f4f
+ca15c14 HEAD@{1}: commit: third commit
+929d14e HEAD@{2}: commit: second commit
+540f4f6 (HEAD -> master) HEAD@{3}: commit (initial): first commit
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git reset --hard ca15
+HEAD is now at ca15c14 third commit
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* ca15c14  (HEAD -> master) 2020-11-13 sato third commit
+* 929d14e  2020-11-13 sato second commit
+* 540f4f6  2020-11-13 sato first commit
+
+■ブランチの確認、作成、移動（作成/移動を一度に行うときは 「git checkout -b ブランチ名」）
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git branch
+* master
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git branch dev
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git branch
+  dev
+* master
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git checkout dev
+Switched to branch 'dev'
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (dev)
+$ git graph
+* ca15c14  (HEAD -> dev, master) 2020-11-13 sato third commit
+* 929d14e  2020-11-13 sato second commit
+* 540f4f6  2020-11-13 sato first commit
+
+■ブランチのマージ、ブランチの削除
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (dev)
+$ git checkout master
+Switched to branch 'master'
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git merge dev
+Updating ca15c14..b541f75
+Fast-forward
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* b541f75  (HEAD -> master, dev) 2020-11-13 sato 4th追加
+* ca15c14  2020-11-13 sato third commit
+* 929d14e  2020-11-13 sato second commit
+* 540f4f6  2020-11-13 sato first commit
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git branch -d dev
+Deleted branch dev (was b541f75).
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/git_basic (master)
+$ git graph
+* b541f75  (HEAD -> master) 2020-11-13 sato 4th追加
+* ca15c14  2020-11-13 sato third commit
+* 929d14e  2020-11-13 sato second commit
+* 540f4f6  2020-11-13 sato first commit
+
+■git tag（しらべる）
+
+
+
+■
+
+
+
+■ブランチを切る際に参照して作成する方法
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Documents/miniSite (master)
+$ git checkout -b development origin/development
+Switched to a new branch 'development'
+Branch 'development' set up to track remote branch 'development' from 'origin'.
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Documents/miniSite (development)
+$ git graph
+* 0912249  (HEAD -> development, origin/development) 2020-11-13 sato index.html
+修正
+* 13f6a95  (origin/master, origin/HEAD, master) 2020-11-13 sato index.html作成
+
+
+■ほかの人が編集されたgithubの内容に追いつくための作業（ここでは別のフォルダで行っている）
+　（２度目からはgit pullだけでもいける）
+●フォルダ移動
+1021PG@DESKTOP-908N7KL MINGW64 ~/Documents/miniSite (master)
+$ cd ~/Desktop/miniSite/
+●ここから作業
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite (development)
+$ git graph
+* 0912249  (HEAD -> development, origin/development) 2020-11-13 sato index.html
+修正
+* 13f6a95  (origin/master, master) 2020-11-13 sato index.html作成
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite (development)
+$ git pull origin development
+Enter passphrase for key '/c/Users/1021PG/.ssh/id_rsa':
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), 263 bytes | 1024 bytes/s, done.
+From github.com:kyousuke-s/miniSite
+ * branch            development -> FETCH_HEAD
+   0912249..dc06a4e  development -> origin/development
+Updating 0912249..dc06a4e
+Fast-forward
+ index.html | 2 ++
+ 1 file changed, 2 insertions(+)
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite (development)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite (master)
+$ git pull origin master
+Enter passphrase for key '/c/Users/1021PG/.ssh/id_rsa':
+From github.com:kyousuke-s/miniSite
+ * branch            master     -> FETCH_HEAD
+   13f6a95..dc06a4e  master     -> origin/master
+Updating 13f6a95..dc06a4e
+Fast-forward
+ index.html | 3 +++
+ 1 file changed, 3 insertions(+)
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite (master)
+$ git graph
+* dc06a4e  (HEAD -> master, origin/master, origin/development, development) 2020-11-13 sato index.html修正
+* 0912249  2020-11-13 sato index.html修正
+* 13f6a95  2020-11-13 sato index.html作成
+
+■プルリクエスト
+
+●フォーク（Fork）
+参加したい他者のリポジトリの画面から「Fork」ボタンを押す
+自分のページにリポジトリが作成されるので「Code」からsshのリンクをコピーしてgitで下記の作業をする
+
+●ローカルでの作業からプッシュまで
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop
+$ git clone git@github.com:kyousuke-s/miniSite-1.git	★cloneのあとにリンクをコピー
+Cloning into 'miniSite-1'...
+Enter passphrase for key '/c/Users/1021PG/.ssh/id_rsa':
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 12 (delta 3), reused 12 (delta 3), pack-reused 0
+Receiving objects: 100% (12/12), done.
+Resolving deltas: 100% (3/3), done.
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop
+$ cd miniSite-1
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite-1 (master)
+$ git checkout -b work		★ブランチの作成/移動
+Switched to a new branch 'work'
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite-1 (work)
+$ vi index.html
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite-1 (work)
+$ git add .
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite-1 (work)
+$ git commit -m"Hello Forkを追加"
+[work c5777fe] Hello Forkを追加
+ 1 file changed, 2 insertions(+)
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/miniSite-1 (work)
+$ git push origin work		★ここでリモートのoriginにさっき作ったブランチ(work)をプッシュする
+Enter passphrase for key '/c/Users/1021PG/.ssh/id_rsa':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 321 bytes | 321.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'work' on GitHub by visiting:
+remote:      https://github.com/kyousuke-s/miniSite-1/pull/new/work
+remote:
+To github.com:kyousuke-s/miniSite-1.git
+ * [new branch]      work -> work
+
+■プルリクエストでFork元のリポジトリの状況に追いつく方法
+
+●まずFork元のリポジトリのsshをコピーしてくる（自分のところにコピーしたリポジトリではないので注意）
+
+●ここからローカルでの作業
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Documents/Training/java/20201112 (master)
+$ cd ~/Desktop/pullreq/		★最初に目的のフォルダに移動
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/pullreq (work)
+$ git remote add joytas git@github.com:joytasnet/pullreq.git	★「git remote add 自由に名前 ssh」
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/pullreq (work)
+$ git fetch joytas
+Enter passphrase for key '/c/Users/1021PG/.ssh/id_rsa':
+remote: Enumerating objects: 48, done.
+remote: Counting objects: 100% (48/48), done.
+remote: Compressing objects: 100% (24/24), done.
+remote: Total 84 (delta 23), reused 33 (delta 16), pack-reused 36
+Unpacking objects: 100% (84/84), 19.99 KiB | 3.00 KiB/s, done.
+From github.com:joytasnet/pullreq
+ * [new branch]      master     -> joytas/master
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/pullreq (work)
+$ git branch -a
+  master
+* work
+  remotes/joytas/master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+  remotes/origin/work
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/pullreq (work)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/pullreq (master)
+$ git merge joytas/master
+Updating 6469399..f7efe3b
+Fast-forward
+ index.html | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+1021PG@DESKTOP-908N7KL MINGW64 ~/Desktop/pullreq (master)
+$ git push
+Enter passphrase for key '/c/Users/1021PG/.ssh/id_rsa':
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:kyousuke-s/pullreq.git
+   6469399..f7efe3b  master -> master
+
+

@@ -14,7 +14,7 @@
 
 - [	Git(間違えてコミットしてしまったら)](https://joytas.net/programming/git/rebase)
 
-- 一つ前のコミットを修正する
+- 一つ前のコミットメッセージを修正する
 
 ```
 $ git commit --amend

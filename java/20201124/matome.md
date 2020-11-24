@@ -8,10 +8,14 @@
 
 ## 2時間目
 
+## 3時間目
 
+## 4時間目
 
-## 1時間目
+## 5時間目
 
-## 1時間目
+## 課題
 
-## 1時間目
+- [コマンドライン](https://prog-8.com/lessons/commandline/study/1)
+
+- [Git](https://prog-8.com/git/study/1/1#/0)

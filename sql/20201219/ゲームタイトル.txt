@@ -1,3 +1,29 @@
+1.releasedがNULLのデータを抽出せよ
+
+2.上記のデータのreleasedを'2017-09-29'へ変更せよ
+
+3.
+SELECT 機種名,sum(price) FROM game_hard
+JOIN game_soft
+ON game_hard.id=game_soft.hard_id
+GROUP BY hard_id
+HAVING sum(price);
+
+SELECT * FROM game_soft ORDER BY released ASC;
+
+SELECT format((SELECT sum(price) FROM game_soft),0);
+
+3DS
+14749
+Switch
+19538
+PSVita
+14598
+PS4
+15989
+Xbox One
+10330
+
 ---Xbox One---
 
 ウィッチャー３ ワイルドハント / 6036 / アクションアドベンチャー RPG / 2015-05-21

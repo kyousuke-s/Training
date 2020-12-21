@@ -1,0 +1,8 @@
+ヘルプ
+新規ソフトウェアのインストール
+http://vrapper.sourceforge.net/update-site/stable 貼り付け
+追加
+名前 Vrapper
+上部の枠内の下２つのチェックボックスにチェック
+[次へ]を押していく
+インストール中にエラーが出たらもう一回やり直し
